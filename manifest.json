@@ -1,13 +1,26 @@
 {
-  "manifest_version": 2,
-
-  "name": "KinoX! Don't Fold",
-  "version": "4.2.0",
-  "description": "KinoX.to folding deactivate",
-
-  "content_scripts": [{
-    "js": ["contentscript.js"],
-    "matches": ["*://kinox.to/Stream/*", "*://kinox.tv/Stream/*","*://kinox.ag/Stream/*","*://kinox.me/Stream/*","*://kinox.am/Stream/*","*://kinox.nu/Stream/*","*://kinox.pe/Stream/*","*://kinox.sg/Stream/*"]
-    }],
-    "web_accessible_resources": ["script.js"]
-  }
+   "manifest_version":2,
+   "name":"KinoX! Don't Fold",
+   "version":"4.2.0",
+   "description":"KinoX.to folding deactivate",
+   "content_scripts":[
+      {
+         "js":[
+            "contentscript.js"
+         ],
+         "matches":[
+            "*://kinox.to/Stream/*",
+            "*://kinox.tv/Stream/*",
+            "*://kinox.ag/Stream/*",
+            "*://kinox.me/Stream/*",
+            "*://kinox.am/Stream/*",
+            "*://kinox.nu/Stream/*",
+            "*://kinox.pe/Stream/*",
+            "*://kinox.sg/Stream/*"
+         ]
+      }
+   ],
+   "web_accessible_resources":[
+      "script.js"
+   ]
+}
