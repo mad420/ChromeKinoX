@@ -9,7 +9,6 @@ function setCookie(name, value)
 
 function getCookie(name)
 {
-  console.log('LOG: get Cookie:'+name);
   var re = new RegExp(name + "=([^;]+)");
   var value = re.exec(document.cookie);
   console.log('LOG: got Cookie:'+name+' val:'+value);
@@ -89,6 +88,12 @@ setCookie(TvShow, getReq);
     console.log('LOG: getPlayerByMirror1ACCESSKEY: '+ Response.Replacement)
 }
 
+document.getElementById('').onchange = function () {
+    alert('changed');
+}
+
+
+
 window.onload = function() {
   console.log('LOG: ONLOADED');
   var TvShow = location.pathname.substring(location.pathname.lastIndexOf("/") + 1).split('.html')[0];//Get TvShow by html filename
@@ -98,12 +103,18 @@ window.onload = function() {
   var resultS = ShowCookie.split('Season=')[1].split('&Episode=')[0];//Get Season and Episode from Cookie
   var resultE = ShowCookie.split('Episode=')[1];
   SelectElement('SeasonSelection',resultS);//Set Selection
+  var element = document.getElementById('SeasonSelection');
   SelectElement('EpisodeSelection',resultE);
-  console.log("SETtING: "+TvShow+": "+resultS+'|'+resultE);
+  var element = document.getElementById('EpisodeSelection');
+  element.onchange('getPlayerByMirror');//call Player to Activate it!!!! 
+
+
+  console.log("SETtING: "+TvShow+": S"+resultS+' E'+resultE);
 };
 
  function SelectElement(elemId,valueToSelect)
  {
      var element = document.getElementById(elemId);
      element.value = valueToSelect;
+     element.click();
  }
