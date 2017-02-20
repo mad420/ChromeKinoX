@@ -1,5 +1,5 @@
 var today = new Date();
-var expiry = new Date(today.getTime() + 180 * 24 * 3600 * 1000); // plus 180 days
+var expiry = new Date(8640000000000000);//new Date(today.getTime() + 10*365 * 24 * 3600 * 1000); // plus 10 years watch out 2038
 
 function setCookie(name, value)
 {
@@ -16,28 +16,11 @@ function getCookie(name)
   return (value != null) ? unescape(value[1]) : null;
 }
 
-
-
-function getEpisodeList(Sender) {
-  console.log("LOG: getEpisodeLis");
-    var Season = $(Sender).attr('value');
-    var EpisodeList = $('#SeasonSelection > option[value=' + Season + ']').attr('rel');
-    var Episodes = EpisodeList.split(",");
-    $('#EpisodeSelection > option').remove();
-    for (Episode in Episodes) {
-        $('#EpisodeSelection').append('<option value="' + Episodes[Episode] + '">Episode ' + Episodes[Episode] + '</option>');
-    }
-    $('#AjaxStream').html('');
-    $('#MirrorArea').html('');
-    getMirrorsByEpisode($('#EpisodeSelection'));
-    console.log("getEpisodeList: S"+Season+"E"+  $('#EpisodeSelection')+"  ");
-}
-
 function getPlayerByMirror(Sender, AutoHideMirr) {
 
-  var TvShow = location.pathname.substring(location.pathname.lastIndexOf("/") + 1).split('.html')[0];//GEt TV SHow by html file
+  var TvShow = location.pathname.substring(location.pathname.lastIndexOf("/") + 1).split('.html')[0];//Get TV SHow by html file
   var getReq = $(Sender).attr('rel');
-  setCookie(TvShow, getReq);//CANT STORE OBJECTS
+  setCookie(TvShow, getReq);
 
     window.clearTimeout(TrashTimer);
     if (MirrorTimer != false) return;
@@ -68,15 +51,12 @@ function getPlayerByMirror(Sender, AutoHideMirr) {
             $('#AjaxStream').html('<img src="' + data_base + '/gr/sys/player/default.divx.na.png" style="margin-bottom: -2px" width="752" border="0" />');
         }
     });
-        console.log('LOG: Reading Episode: '+  $(Sender).val()+$(Sender).attr('rel'));//Debug
 }
 
 function getPlayerByMirror1ACCESSKEY(Sender, AutoHideMirr) {
-console.log('LOG: getPlayerByMirrorACCESSKEY'+$(Sender).attr('rel'));
-
-var TvShow = location.pathname.substring(location.pathname.lastIndexOf("/") + 1).split('.html')[0];//GEt TV SHow by html file
+var TvShow = location.pathname.substring(location.pathname.lastIndexOf("/") + 1).split('.html')[0];//Get TV SHow by html file
 var getReq = $(Sender).attr('rel');
-setCookie(TvShow, getReq);//CANT STORE OBJECTS
+setCookie(TvShow, getReq);
 
     window.clearTimeout(TrashTimer);
     if (MirrorTimer != false) return;
@@ -109,41 +89,17 @@ setCookie(TvShow, getReq);//CANT STORE OBJECTS
     console.log('LOG: getPlayerByMirror1ACCESSKEY: '+ Response.Replacement)
 }
 
-
-
-function toogleHosterList() {
-  console.log('LOG: toogleHosterList');
-    $('#ClickHelper').toggleClass('DowntoUp');
-    if ($('#HosterList:visible').length == 0) {
-        $('#HosterList').slideDown('fast');
-        $('#MirHeadline').html($('#MirHeadline').attr('rel'));
-    } else {
-        $('#HosterList').slideUp('fast');
-    }
-    window.clearTimeout(TrashTimer);
-}
-
-
-
-
-
 window.onload = function() {
   console.log('LOG: ONLOADED');
-  var TvShow = location.pathname.substring(location.pathname.lastIndexOf("/") + 1).split('.html')[0];
-
-  var ShowCookie = getCookie(TvShow); //0A_Gifted_Man-1&Hoster=70&Mirror=2&Season=1&Episode=7
+  var TvShow = location.pathname.substring(location.pathname.lastIndexOf("/") + 1).split('.html')[0];//Get TvShow by html filename
+  var ShowCookie = getCookie(TvShow);//Get cookie by TVShowName
 
   console.log('Loaded: SeriesString: '+ShowCookie);
-  var resultS = ShowCookie.split('Season=')[1].split('&Episode=')[0];
+  var resultS = ShowCookie.split('Season=')[1].split('&Episode=')[0];//Get Season and Episode from Cookie
   var resultE = ShowCookie.split('Episode=')[1];
-
-  SelectElement('SeasonSelection',resultS);
+  SelectElement('SeasonSelection',resultS);//Set Selection
   SelectElement('EpisodeSelection',resultE);
-
-
-      console.log("SETtING: "+TvShow+": "+resultS+'|'+resultE);
-
-
+  console.log("SETtING: "+TvShow+": "+resultS+'|'+resultE);
 };
 
  function SelectElement(elemId,valueToSelect)
@@ -151,9 +107,3 @@ window.onload = function() {
      var element = document.getElementById(elemId);
      element.value = valueToSelect;
  }
-// <select id="leaveCode" name="leaveCode">
-//   <option value="10">Annual Leave</option>
-//   <option value="11">Medical Leave</option>
-//   <option value="14">Long Service</option>
-//   <option value="17">Leave Without Pay</option>
-// </select>
