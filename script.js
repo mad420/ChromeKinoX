@@ -88,10 +88,6 @@ setCookie(TvShow, getReq);
     console.log('LOG: getPlayerByMirror1ACCESSKEY: '+ Response.Replacement)
 }
 
-document.getElementById('').onchange = function () {
-    alert('changed');
-}
-
 
 
 window.onload = function() {
@@ -106,7 +102,7 @@ window.onload = function() {
   var element = document.getElementById('SeasonSelection');
   SelectElement('EpisodeSelection',resultE);
   var element = document.getElementById('EpisodeSelection');
-  element.onchange('getPlayerByMirror');//call Player to Activate it!!!! 
+  element.onchange('getPlayerByMirror');//call Player to Activate it!!!!
 
 
   console.log("SETtING: "+TvShow+": S"+resultS+' E'+resultE);
